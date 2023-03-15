@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 robot = "*"
+pyyaml = "*"
 
 [dev-packages]
 
