@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime
 import yaml
+import sys
 
 def cmd_line():
     parser = argparse.ArgumentParser(
@@ -25,6 +26,12 @@ class LogcatParser():
         self.applications = {}
 
 
+    def print(self, message):
+        from robot.api import logger
+        logger.info(message, html=True, also_console=True)
+        # force flush to display at runtime
+        sys.stdout.flush()
+
     def setup(self, input_file):
         with open(input_file) as f:
             lines = f.readlines()
@@ -39,7 +46,7 @@ class LogcatParser():
             if "Layer: Destroyed ActivityRecord" in line:
                 self.matching_lines_stop.append(line)
         if self.apps != []:
-            return True, self.apps
+            return True, "SETUP PASSED"
 
 
     def run(self, output="output.yml"):
@@ -75,7 +82,7 @@ class LogcatParser():
         with open(output, "w") as f:
             f.write(yaml_string)
 
-        return True, self.applications
+        return True, "Run PASSED"
 
 
     def teardown(self, max_lifespan=30, total_app_percentage=75):
@@ -84,7 +91,7 @@ class LogcatParser():
         for app in self.applications:
             if self.applications[app]["lifespan"] > max_lifespan:
                 i = i + 1
-                print("WARNING: " + app + " took " + str(self.applications[app]["lifespan"]) + "s")
+                self.print("WARNING: " + app + " took " + str(self.applications[app]["lifespan"]) + "s")
 
         print("Total no of apps", no_of_apps)
         print("Good times no of apps", no_of_apps - i)
@@ -95,10 +102,10 @@ class LogcatParser():
         # Get verdict
         if no_of_apps - i > no_of_apps * total_app_percentage / 100:
             print("PASS")
-            return True, "PASS"
+            return True, "TEST PASS"
         else:
             print("FAIL")
-            return False, "FAIL"
+            return False, "TEST FAIL"
 
 
 if __name__ == "__main__":

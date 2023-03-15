@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-robot = "*"
 pyyaml = "*"
+robotframework = "*"
 
 [dev-packages]
 
