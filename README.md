@@ -1,6 +1,6 @@
 # robotframework_example
 
-## To run:
+## To prepare enviroment:
 ```
 pip3 install pipenv
 pipenv install
