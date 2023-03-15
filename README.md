@@ -5,6 +5,11 @@
 pip3 install pipenv
 pipenv install
 ```
+or
+
+```
+pip3 install robotframework
+```
 
 ## Usage:
 ```
