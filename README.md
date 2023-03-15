@@ -1,10 +1,12 @@
 # robotframework_example
 
-To run:
+## To run:
+```
 pip3 install pipenv
 pipenv install
+```
 
-Usage:
+## Usage:
 python3 LogcatParser.py -f logcat_applications.txt
 
 or
