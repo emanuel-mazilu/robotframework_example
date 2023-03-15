@@ -2,7 +2,7 @@
 Library          ${CURDIR}/LogcatParser.py
 Documentation    Measures the response time when switching to different audio sources.
 ...
-...              Usage: pipenv run robot -v input_file:XXX -v output_file:xxx -v min_percentage
+...              usage: pipenv run robot -v input_file:xxx -v output_file:xxx -v min_percentage
 ...                                       -v max_lifespan logcat_parser.robot
 
 Test Setup       SETUP_LOGCAT_PARSER
